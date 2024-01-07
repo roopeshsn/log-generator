@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  log-generator-network:
+    driver: bridge
+
+services:
+  web1:
+    image: log-generator
+    hostname: web1
+    container_name: web1
+    networks: 
+      - log-generator-network
+    volumes:
+      - .:/app
+    # command: sh -c "rm -f /var/log/secure /var/log/access_log;python3 /app/log_generator.py -a /var/log/access_log -s /var/log/secure"
+    # extra_hosts:
+    #   - "splunk.docker.internal:host-gateway"
+  # web2:
+  #   image: log-generator
+  #   hostname: web2
+  #   container_name: web2
+  #   networks: 
+  #     - log-generator-network
+  #   volumes:
+  #     - .:/app
+  #   command: sh -c "rm -f /var/log/secure /var/log/access_log;python3 /app/log_generator.py -a /var/log/access_log -s /var/log/secure"
+  #   extra_hosts:
+  #     - "splunk.docker.internal:host-gateway"
